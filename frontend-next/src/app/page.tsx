@@ -369,8 +369,13 @@ export default function Home() {
 
       if (response.ok) {
         const data = await response.json();
-        setExtractedOcrText(data.text);
-        addToast('Text extracted successfully!', 'success');
+        if (data.text && data.text.trim()) {
+          setExtractedOcrText(data.text);
+          addToast('Text extracted successfully!', 'success');
+        } else {
+          setExtractedOcrText('');
+          addToast('OCR returned no text. Please configure GEMINI_API_KEYS on Render!', 'warning');
+        }
       } else {
         const errData = await response.json().catch(() => ({}));
         addToast(errData.detail || 'Text extraction failed.', 'error');
