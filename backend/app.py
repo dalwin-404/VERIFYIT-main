@@ -245,8 +245,9 @@ def is_admin(user: User) -> bool:
     return user.email in admin_emails or "admin" in user.email.lower()
 
 # --- Configuration ---
+raw_gemini_keys = os.environ.get("GEMINI_API_KEYS", "") or os.environ.get("GEMINI_API_KEY", "")
 GEMINI_API_KEYS = [
-    key.strip() for key in os.environ.get("GEMINI_API_KEYS", "").split(",") if key.strip()
+    key.strip() for key in raw_gemini_keys.split(",") if key.strip()
 ]
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_MODEL = "llama-3.3-70b-versatile"
