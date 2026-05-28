@@ -119,7 +119,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://verifyit-3.onrender.com",
+        "https://verifyit-backend-fm83.onrender.com",
         "https://verifyit-ten.vercel.app",
         "https://verifyit-main.vercel.app",
         "http://localhost:3000",
