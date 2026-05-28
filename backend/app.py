@@ -764,18 +764,19 @@ Respond ONLY with valid JSON and in {language_name}."""
                 try:
                     candidates = data.get('candidates', [])
                     for candidate in candidates:
-                        for part in candidate.get('content', []):
+                        parts = candidate.get('content', {}).get('parts', [])
+                        for part in parts:
                             if isinstance(part, dict):
                                 content += part.get('text', '')
                             elif isinstance(part, str):
                                 content += part
-                except Exception:
-                    pass
+                except Exception as e:
+                    print(f"Gemini OCR parse error: {e}")
 
                 if not content:
                     # Fallback for alternate Gemini response shapes
                     try:
-                        content = data['candidates'][0]['content'][0]['text']
+                        content = data['candidates'][0]['content']['parts'][0]['text']
                     except Exception:
                         content = ''
 
@@ -1442,10 +1443,16 @@ async def extract_text(request: ImageRequest, current_user: User = Depends(get_c
         raise HTTPException(status_code=400, detail="No image data provided")
 
     extracted_text = await extract_text_with_ocr(request.image, request.filename, request.language)
+    print(f"DEBUG: extract_text_with_ocr returned: {len(extracted_text)} chars")
 
     if not extracted_text:
         # Fallback to Gemini OCR extraction
+        print(f"DEBUG: Falling back to extract_text_with_gemini")
         extracted_text = await extract_text_with_gemini(request.image, request.filename, request.language)
+        print(f"DEBUG: extract_text_with_gemini returned: {len(extracted_text)} chars")
+
+    if not extracted_text:
+        print(f"DEBUG: Both OCR methods failed to extract text")
 
     return {
         "text": extracted_text,
