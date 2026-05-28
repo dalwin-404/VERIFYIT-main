@@ -103,6 +103,8 @@ export default function Home() {
   const [imagePreview, setImagePreview] = useState<string>('');
   const [imageLoading, setImageLoading] = useState(false);
   const [imageResult, setImageResult] = useState<VerificationResult | null>(null);
+  const [ocrLoading, setOcrLoading] = useState(false);
+  const [extractedOcrText, setExtractedOcrText] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Deepfake detector states
@@ -339,6 +341,44 @@ export default function Home() {
       addToast('Error processing image upload.', 'error');
     } finally {
       setImageLoading(false);
+    }
+  };
+
+  const handleExtractText = async () => {
+    if (!imageFile) {
+      addToast('Please upload an image first.', 'warning');
+      return;
+    }
+    setOcrLoading(true);
+    setExtractedOcrText('');
+    
+    try {
+      const base64 = await fileToBase64(imageFile);
+      const response = await fetch(`${API_BASE_URL}/extract-text`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('verifyit-token')}`
+        },
+        body: JSON.stringify({
+          image: base64,
+          filename: imageFile.name,
+          language: language
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setExtractedOcrText(data.text);
+        addToast('Text extracted successfully!', 'success');
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        addToast(errData.detail || 'Text extraction failed.', 'error');
+      }
+    } catch (err) {
+      addToast('Error extracting text from image.', 'error');
+    } finally {
+      setOcrLoading(false);
     }
   };
 
@@ -809,8 +849,11 @@ export default function Home() {
               )}
 
               <div style={{ marginTop: '1rem', display: 'flex', gap: '0.75rem' }}>
-                <button className="btn btn-primary" onClick={handleVerifyImage} disabled={imageLoading}>
+                <button className="btn btn-primary" onClick={handleVerifyImage} disabled={imageLoading || ocrLoading}>
                   {imageLoading ? 'Analyzing...' : 'Verify Image'}
+                </button>
+                <button className="btn btn-secondary" onClick={handleExtractText} disabled={imageLoading || ocrLoading}>
+                  {ocrLoading ? 'Extracting...' : 'Extract Text (OCR)'}
                 </button>
               </div>
 
@@ -818,6 +861,28 @@ export default function Home() {
                 <div className="loading-overlay">
                   <div className="spinner"></div>
                   <div className="loading-text">Running EasyOCR, Gemini Vision & Fact Fusions...</div>
+                </div>
+              )}
+
+              {ocrLoading && (
+                <div className="loading-overlay">
+                  <div className="spinner"></div>
+                  <div className="loading-text">Running Google Vision OCR & fallback extraction...</div>
+                </div>
+              )}
+
+              {extractedOcrText && (
+                <div style={{ marginTop: '1.25rem', padding: '1rem', background: 'var(--bg-input)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                  <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span>Extracted Text</span>
+                    <button className="btn btn-ghost btn-sm" style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem' }} onClick={() => {
+                      setTextVal(extractedOcrText);
+                      addToast('Copied to text verification box!', 'info');
+                    }}>Use for Text Verification</button>
+                  </h4>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)', fontStyle: 'italic', lineHeight: 1.5 }}>
+                    "{extractedOcrText}"
+                  </p>
                 </div>
               )}
 
