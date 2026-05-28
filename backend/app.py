@@ -1234,13 +1234,8 @@ async def logout(current_user: User = Depends(get_current_user)):
 
 @app.get("/")
 async def root():
-    """Serve the main application page."""
-    from fastapi.responses import FileResponse
-    response = FileResponse(os.path.join(FRONTEND_DIR, "home.html"), media_type="text/html")
-    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "0"
-    return response
+    """API Root endpoint."""
+    return {"status": "VerifyIt API is running", "version": "2.0"}
 
 @app.post("/check")
 async def check_text(request: TextRequest, current_user: User = Depends(get_current_user)):
@@ -1795,16 +1790,7 @@ async def health_check():
         "cache_size": len(cache)
     }
 
-# --- Static Files ---
-app.mount(
-    "/",
-    StaticFiles(
-        directory=FRONTEND_DIR,
-        html=True,
-       
-    ),
-    name="static"
-)
+# --- API mode only, no static files mounted ---
 
 # --- Run ---
 if __name__ == "__main__":
