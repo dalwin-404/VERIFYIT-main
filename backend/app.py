@@ -751,6 +751,9 @@ Respond ONLY with valid JSON and in {language_name}."""
                 json=payload
             )
 
+            if response.status_code != 200:
+                print(f"DEBUG GEMINI: HTTP {response.status_code} - Body: {response.text[:200]}")
+
             if response.status_code == 429:
                 cooldown_key(api_key, 60)
                 next_key = get_next_gemini_key()
@@ -763,6 +766,9 @@ Respond ONLY with valid JSON and in {language_name}."""
                 content = ''
                 try:
                     candidates = data.get('candidates', [])
+                    if not candidates and 'promptFeedback' in data:
+                        print(f"DEBUG GEMINI: No candidates. Safety feedback: {data.get('promptFeedback')}")
+                        
                     for candidate in candidates:
                         parts = candidate.get('content', {}).get('parts', [])
                         for part in parts:
@@ -789,6 +795,8 @@ Respond ONLY with valid JSON and in {language_name}."""
                         except json.JSONDecodeError:
                             pass
                     return content.strip()
+                else:
+                    print(f"DEBUG GEMINI: Parsed content is completely empty. Full Data: {json.dumps(data)[:300]}")
                 return ""
 
             return ""
