@@ -63,6 +63,14 @@ const quizQuestions = [
   }
 ];
 
+const normalizeData = (data: any) => ({
+  ...data,
+  bert_score: Math.min(100, Math.max(0, Math.round(data.bert_score > 100 ? data.bert_score / 100 : (data.bert_score || 0)))),
+  llm_score: Math.min(100, Math.max(0, Math.round(data.llm_score > 100 ? data.llm_score / 100 : (data.llm_score || 0)))),
+  web_score: Math.min(100, Math.max(0, Math.round(data.web_score > 100 ? data.web_score / 100 : (data.web_score || 0)))),
+  credibility_score: Math.min(100, Math.max(0, Math.round(data.credibility_score > 100 ? data.credibility_score / 100 : (data.credibility_score || 0))))
+});
+
 export default function Home() {
   const router = useRouter();
   const { user, token, logout, updateUserLocal } = useAuth();
@@ -228,7 +236,7 @@ export default function Home() {
 
       if (response.ok) {
         const data = await response.json();
-        setTextResult(data);
+        setTextResult(normalizeData(data));
         saveToHistory('text', textVal, data.credibility_score, data.verdict);
         addToast('Verification complete!', 'success');
       } else {
@@ -266,7 +274,7 @@ export default function Home() {
 
       if (response.ok) {
         const data = await response.json();
-        setUrlResult(data);
+        setUrlResult(normalizeData(data));
         saveToHistory('url', urlVal, data.credibility_score, data.verdict);
         addToast('URL verification complete!', 'success');
       } else {
@@ -330,7 +338,7 @@ export default function Home() {
 
       if (response.ok) {
         const data = await response.json();
-        setImageResult(data);
+        setImageResult(normalizeData(data));
         saveToHistory('image', imageFile.name, data.credibility_score, data.verdict);
         addToast('Image verification complete!', 'success');
       } else {
@@ -1097,14 +1105,15 @@ export default function Home() {
                 <div className="empty-state">No live feeds available right now.</div>
               ) : (
                 trendingArticles.map((art, idx) => (
-                  <div key={idx} className="news-card">
-                    <div className="news-category">⭐ Live</div>
+                  <a href={art.link} target="_blank" rel="noopener noreferrer" key={idx} className="news-card">
+                    <div className="news-category"><i className="fas fa-bolt"></i> LIVE</div>
                     <div className="news-title" dangerouslySetInnerHTML={{ __html: art.title }} />
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }} dangerouslySetInnerHTML={{ __html: art.description }} />
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }} dangerouslySetInnerHTML={{ __html: art.description }} />
                     <div className="news-source">
-                      <span>🏛️ {art.source}</span> • <span>⏱️ {art.published}</span>
+                      <span><i className="fas fa-newspaper"></i> {art.source}</span>
+                      <span style={{ marginLeft: 'auto' }}><i className="far fa-clock"></i> {art.published}</span>
                     </div>
-                  </div>
+                  </a>
                 ))
               )}
             </div>
