@@ -61,7 +61,10 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     faq_q4: 'Is my data stored or shared?',
     faq_a4: 'No. VerifyIt processes your text in real-time and does not store your input on our servers. Verification history is saved locally in your browser using localStorage and is never transmitted externally. You can clear your history at any time.',
     faq_q5: 'Can I verify images and screenshots?',
-    faq_a5: 'Yes! VerifyIt supports image verification using OCR (Optical Character Recognition) to extract text from screenshots, and Gemini Vision AI to analyze image content directly. Simply upload a screenshot of a news article, social media post, or any image containing text, and our AI will analyze it.'
+    faq_a5: 'Yes! VerifyIt supports image verification using OCR (Optical Character Recognition) to extract text from screenshots, and Gemini Vision AI to analyze image content directly. Simply upload a screenshot of a news article, social media post, or any image containing text, and our AI will analyze it.',
+    hero_accuracy: 'Accuracy Rate',
+    hero_models: 'AI Models',
+    hero_latency: 'Response Time'
   },
   yo: {
     nav_verify: 'Ṣàyẹwo',
@@ -126,7 +129,10 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     faq_q4: 'Ṣé a ń tọ́jú tàbí pín data mi?',
     faq_a4: 'Rárá. VerifyIt ń ṣe àyẹ̀wò rẹ lẹ́sẹkẹsẹ kò sì ní tọ́jú rẹ̀.',
     faq_q5: 'Ṣé mo lè ṣàyẹwo àwòrán àti screenshot?',
-    faq_a5: 'Bẹ́ẹ̀ni! VerifyIt ń ṣe atilẹyin àwòrán nipa lílo OCR àti Gemini Vision AI.'
+    faq_a5: 'Bẹ́ẹ̀ni! VerifyIt ń ṣe atilẹyin àwòrán nipa lílo OCR àti Gemini Vision AI.',
+    hero_accuracy: 'Ìpéye',
+    hero_models: 'Àwọn Módẹ́lì AI',
+    hero_latency: 'Àkókò Idahun'
   },
   ha: {
     nav_verify: 'Tabbatar',
@@ -191,7 +197,10 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     faq_q4: 'Shin ana ajiye bayanai na?',
     faq_a4: 'A\'a. VerifyIt baya ajiye bayanan ku a cikin ma\'adanar mu.',
     faq_q5: 'Zan iya bincika hotuna?',
-    faq_a5: 'Eh! Zaku iya bincika hotuna ta amfani da OCR da kuma tsarin AI.'
+    faq_a5: 'Eh! Zaku iya bincika hotuna ta amfani da OCR da kuma tsarin AI.',
+    hero_accuracy: 'Inganci',
+    hero_models: 'Model na AI',
+    hero_latency: 'Lokacin Amsawa'
   },
   ig: {
     nav_verify: 'Nyocha',
@@ -256,7 +265,10 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     faq_q4: 'E debere data m?',
     faq_a4: 'Mba. VerifyIt anaghị echekwa data gị n\'ịntanetị.',
     faq_q5: 'Enwere m ike inyocha ihe onyonyo?',
-    faq_a5: 'Ee! Ị nwere ike inyocha ihe onyonyo site na iji ngwa OCR na AI.'
+    faq_a5: 'Ee! Ị nwere ike inyocha ihe onyonyo site na iji ngwa OCR na AI.',
+    hero_accuracy: 'Izi Ezi',
+    hero_models: 'Ụdị AI',
+    hero_latency: 'Oge Nzaghachi'
   }
 };
 

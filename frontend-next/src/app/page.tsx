@@ -559,8 +559,8 @@ export default function Home() {
           </a>
 
           <ul className="navbar-links">
-            <li><a href="#" className="active">Verify</a></li>
-            <li><a href="#" onClick={() => addToast('VerifyIt Nigeria connects your facts with deep machine models.', 'info')}>About</a></li>
+            <li><a href="#" className="active">{t('nav_verify')}</a></li>
+            <li><a href="#" onClick={() => addToast('VerifyIt Nigeria connects your facts with deep machine models.', 'info')}>{t('nav_about')}</a></li>
           </ul>
 
           <div className="navbar-actions">
@@ -613,26 +613,26 @@ export default function Home() {
           <div className="hero-content">
             <div className="hero-badge">
               <span className="pulse-dot"></span>
-              AI-Powered Verification Nigeria
+              {t('hero_badge')}
             </div>
-            <h1>Detect Fake News<br />with <span className="gradient-text">VerifyIt</span></h1>
-            <p>{t('hero_paragraph')}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: t('hero_heading').replace('VerifyIt', '<span class="gradient-text">VerifyIt</span>') }}></h1>
+            <p className="hero-subtitle">{t('hero_paragraph')}</p>
             <div className="hero-buttons">
-              <a href="#verify" className="btn btn-primary btn-lg">Start Verifying <i className="fas fa-arrow-down"></i></a>
-              <a href="#trending" className="btn btn-secondary btn-lg">Trending Headlines</a>
+              <a href="#verify" className="btn btn-primary btn-lg">{t('hero_start')} <i className="fas fa-arrow-down"></i></a>
+              <a href="#trending" className="btn btn-secondary btn-lg">{t('hero_trending')}</a>
             </div>
             <div className="hero-stats">
               <div className="hero-stat">
                 <div className="stat-value">97.3%</div>
-                <div className="stat-label">Accuracy Rate</div>
+                <div className="stat-label">{t('hero_accuracy')}</div>
               </div>
               <div className="hero-stat">
                 <div className="stat-value">3</div>
-                <div className="stat-label">AI Models</div>
+                <div className="stat-label">{t('hero_models')}</div>
               </div>
               <div className="hero-stat">
                 <div className="stat-value">&lt;5s</div>
-                <div className="stat-label">Response Time</div>
+                <div className="stat-label">{t('hero_latency')}</div>
               </div>
             </div>
           </div>
@@ -642,7 +642,7 @@ export default function Home() {
       {/* Main Verify Panel */}
       <section className="verify-section" id="verify">
         <div className="container">
-          <h2 className="section-title">Verify Your <span className="gradient-text">Content</span></h2>
+          <h2 className="section-title" dangerouslySetInnerHTML={{ __html: t('verify_title').replace('Content', '<span class="gradient-text">Content</span>').replace('Àkóónú', '<span class="gradient-text">Àkóónú</span>').replace('Abun Cikin', '<span class="gradient-text">Abun Cikin</span>').replace('Ebumnuche', '<span class="gradient-text">Ebumnuche</span>') }}></h2>
           <p className="section-subtitle">{t('verify_subtitle')}</p>
 
           <div className="verify-grid">
@@ -1052,8 +1052,8 @@ export default function Home() {
         <div className="container">
           <div className="section-header feature-header">
             <div>
-              <h2 className="section-title">Play and Share</h2>
-              <p className="section-subtitle">Tackle misinformation by playing, translation toggles, or direct reporting.</p>
+              <h2 className="section-title">{t('play_learn_title')}</h2>
+              <p className="section-subtitle">{t('play_learn_subtitle')}</p>
             </div>
           </div>
 
@@ -1061,28 +1061,28 @@ export default function Home() {
             {/* Fake News Quiz */}
             <article className="feature-card">
               <div className="feature-card-icon"><i className="fas fa-brain"></i></div>
-              <h3>Fake News Quiz</h3>
-              <p>Practice identifying sensational headlines from actual confirmed reporting.</p>
+              <h3>{t('quiz_title')}</h3>
+              <p>{t('quiz_desc')}</p>
               <button type="button" className="btn btn-secondary" onClick={() => { setQuizOpen(true); resetQuiz(); }}>
-                Start Quiz
+                {t('start_quiz_btn')}
               </button>
             </article>
 
             {/* WhatsApp Formatting */}
             <article className="feature-card whatsapp-card">
               <div className="feature-card-icon"><i className="fas fa-comment"></i></div>
-              <h3>WhatsApp Verification Helper</h3>
-              <p>Generate formatted messages with safety headers for easy direct sharing.</p>
+              <h3>{t('whatsapp_title')}</h3>
+              <p>{t('whatsapp_desc')}</p>
               <textarea
                 className="verify-input"
                 style={{ minHeight: '80px', width: '100%' }}
                 value={waInput}
                 onChange={(e) => setWaInput(e.target.value)}
-                placeholder="Paste doubtful article headers..."
+                placeholder={t('whatsapp_input_placeholder')}
               />
               <div className="whatsapp-actions">
-                <button className="btn btn-primary btn-sm" onClick={handleGenerateWhatsApp}>Generate Message</button>
-                {waMessage && <button className="btn btn-ghost btn-sm" onClick={handleCopyWhatsApp}>Copy</button>}
+                <button className="btn btn-primary btn-sm" onClick={handleGenerateWhatsApp}>{t('whatsapp_generate')}</button>
+                {waMessage && <button className="btn btn-ghost btn-sm" onClick={handleCopyWhatsApp}>{t('whatsapp_copy')}</button>}
               </div>
               {waMessage && (
                 <div className="whatsapp-output" style={{ padding: '0.5rem', fontSize: '0.8rem' }}>
