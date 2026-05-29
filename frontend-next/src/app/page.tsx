@@ -736,14 +736,47 @@ export default function Home() {
                       </div>
                     </div>
 
+                    {textResult.reasoning && (
+                      <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <i className="fas fa-lightbulb" style={{ color: 'var(--warning)' }}></i> AI Analysis
+                        </h4>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7 }}>
+                          {textResult.reasoning}
+                        </p>
+                      </div>
+                    )}
+
                     {textResult.explanations && textResult.explanations.length > 0 && (
                       <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
-                        <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.5rem' }}>AI Analytical Explanation</h4>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <i className="fas fa-comment-dots" style={{ color: 'var(--accent-secondary)' }}></i> AI Explanation
+                        </h4>
                         <ul style={{ margin: 0, paddingLeft: '1.2rem', color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7 }}>
                           {textResult.explanations.map((exp, idx) => (
                             <li key={idx}>{exp}</li>
                           ))}
                         </ul>
+                      </div>
+                    )}
+
+                    {textResult.sources && textResult.sources.length > 0 && (
+                      <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
+                        <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <i className="fas fa-link" style={{ color: 'var(--info)' }}></i> Sources Found
+                        </h4>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                          {textResult.sources.map((src, i) => (
+                            <a key={i} href={src.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'space-between', padding: '0.75rem', background: 'rgba(0,0,0,0.15)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)', fontSize: '0.85rem', textDecoration: 'none', color: 'var(--text-primary)', transition: 'all 0.2s' }}>
+                              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '75%', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <i className="fas fa-external-link-alt" style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}></i> {src.title || src.url}
+                              </span>
+                              <span style={{ color: src.trusted ? 'var(--success)' : 'var(--text-muted)', fontWeight: 600, fontSize: '0.75rem', padding: '0.2rem 0.5rem', background: src.trusted ? 'rgba(34, 197, 94, 0.1)' : 'rgba(255,255,255,0.05)', borderRadius: '4px' }}>
+                                {src.trusted ? '✓ Trusted' : 'Unconfirmed'}
+                              </span>
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
