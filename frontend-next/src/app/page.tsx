@@ -137,6 +137,9 @@ export default function Home() {
   const [trendingArticles, setTrendingArticles] = useState<any[]>([]);
   const [trendingLoading, setTrendingLoading] = useState(false);
 
+  // FAQ state
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
   useEffect(() => {
     // Require authentication
     const savedToken = localStorage.getItem('verifyit-token');
@@ -1366,29 +1369,34 @@ export default function Home() {
       )}
 
       {/* FAQ Section */}
-      <section className="faq-section">
+      <section className="faq-section" id="faq">
         <div className="container">
-          <h2 className="section-title" style={{ textAlign: 'center' }}>Frequently Asked <span className="gradient-text">Questions</span></h2>
-          <p className="section-subtitle" style={{ margin: '0 auto', textAlign: 'center' }}>Everything you need to know about VerifyIt</p>
+          <h2 className="section-title" style={{ textAlign: 'center' }}>{t('faq_title_1')} <span className="gradient-text">{t('faq_title_2')}</span></h2>
+          <p className="section-subtitle" style={{ margin: '0 auto', textAlign: 'center' }}>{t('faq_subtitle')}</p>
 
           <div className="faq-list">
-            <div className="faq-item">
-              <div className="faq-question">
-                How does VerifyIt detect fake news?
+            {[
+              { q: 'faq_q1', a: 'faq_a1' },
+              { q: 'faq_q2', a: 'faq_a2' },
+              { q: 'faq_q3', a: 'faq_a3' },
+              { q: 'faq_q4', a: 'faq_a4' },
+              { q: 'faq_q5', a: 'faq_a5' }
+            ].map((faq, idx) => (
+              <div key={idx} className={`faq-item ${openFaqIndex === idx ? 'open' : ''}`}>
+                <button
+                  className="faq-question"
+                  onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                >
+                  {t(faq.q)}
+                  <span className="faq-toggle">+</span>
+                </button>
+                <div className="faq-answer">
+                  <div className="faq-answer-inner">
+                    {t(faq.a)}
+                  </div>
+                </div>
               </div>
-              <div className="faq-answer-inner">
-                VerifyIt uses a multi-model approach combining BERT-based natural language processing, large language model analysis via Groq, and real-time web search verification with a focus on global news sources.
-              </div>
-            </div>
-
-            <div className="faq-item">
-              <div className="faq-question">
-                How accurate is the verification?
-              </div>
-              <div className="faq-answer-inner">
-                Our multi-model approach achieves approximately 97% accuracy on known datasets. However, no automated system is perfect — we recommend using VerifyIt as a tool to guide your judgment.
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

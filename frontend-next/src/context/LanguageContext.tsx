@@ -48,7 +48,20 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     verdict_desc_medium: 'This content seems mostly credible but some claims could not be fully verified.',
     verdict_desc_mixed: 'This content has mixed signals — some claims check out while others are questionable.',
     verdict_desc_warning: 'This content shows significant warning signs of being unreliable or misleading.',
-    verdict_desc_fake: 'This content is very likely to be fake or heavily misleading. Exercise extreme caution.'
+    verdict_desc_fake: 'This content is very likely to be fake or heavily misleading. Exercise extreme caution.',
+    faq_title_1: 'Frequently Asked',
+    faq_title_2: 'Questions',
+    faq_subtitle: 'Everything you need to know about VerifyIt',
+    faq_q1: 'How does VerifyIt detect fake news?',
+    faq_a1: 'VerifyIt uses a multi-model approach combining BERT-based natural language processing, large language model analysis via Groq, and real-time web search verification with a focus on global news sources. The BERT model evaluates linguistic patterns, the LLM provides contextual reasoning, and web search cross-references claims against trusted international and regional sources. These scores are weighted and combined for a final credibility rating.',
+    faq_q2: 'How accurate is the verification?',
+    faq_a2: 'Our multi-model approach achieves approximately 97% accuracy on known datasets. However, no automated system is perfect — we recommend using VerifyIt as a tool to guide your judgment, not as an absolute truth detector. Always cross-reference important claims with multiple trusted sources.',
+    faq_q3: 'What does the credibility score mean?',
+    faq_a3: 'The credibility score ranges from 0 to 100. A score above 70 suggests the content is likely credible, 40-70 indicates uncertainty or mixed signals, and below 40 suggests the content may be unreliable or misleading. The score factors in BERT analysis (25%), LLM reasoning (35%), and web verification (40%).',
+    faq_q4: 'Is my data stored or shared?',
+    faq_a4: 'No. VerifyIt processes your text in real-time and does not store your input on our servers. Verification history is saved locally in your browser using localStorage and is never transmitted externally. You can clear your history at any time.',
+    faq_q5: 'Can I verify images and screenshots?',
+    faq_a5: 'Yes! VerifyIt supports image verification using OCR (Optical Character Recognition) to extract text from screenshots, and Gemini Vision AI to analyze image content directly. Simply upload a screenshot of a news article, social media post, or any image containing text, and our AI will analyze it.'
   },
   yo: {
     nav_verify: 'Ṣàyẹwo',
@@ -100,7 +113,20 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     verdict_desc_medium: 'Àkóónú yìí dàbí ẹni pé ó lè jẹ́ gidi ṣùgbọ́n ìkan nínú rẹ̀ kò tíì jẹ́ kó dájú.',
     verdict_desc_mixed: 'Àkóónú yìí ní ami àìmọ̀kan — diẹ̀ nínú ẹ̀rí wà, ṣugbọn àwọn míì ṣòro láti jẹ́ kó dájú.',
     verdict_desc_warning: 'Àkóónú yìí fi àfihàn ìkìlọ̀ hàn pé ó lè jẹ́ aláìdánidájọ́ tàbí ẹ̀sùn.',
-    verdict_desc_fake: 'Àkóónú yìí dájú pé ó ṣeé ṣe kí ó jẹ́ ìròyìn asán. Ṣọra gan-an.'
+    verdict_desc_fake: 'Àkóónú yìí dájú pé ó ṣeé ṣe kí ó jẹ́ ìròyìn asán. Ṣọra gan-an.',
+    faq_title_1: 'Àwọn Ìbéèrè Tí A Ń Béèrè',
+    faq_title_2: 'Lórèkóòrè',
+    faq_subtitle: 'Gbogbo ohun tí o nílò láti mọ̀ nípa VerifyIt',
+    faq_q1: 'Bawo ni VerifyIt ṣe ń ṣe àwárí ìròyìn asán?',
+    faq_a1: 'VerifyIt ń lo oríṣiríṣi ọ̀nà àyẹ̀wò pẹ̀lú BERT, LLM, àti àwárí lórí intanẹẹti láti ṣàyẹwo ìròyìn.',
+    faq_q2: 'Ṣé àyẹ̀wò náà péye?',
+    faq_a2: 'Ọ̀nà àyẹ̀wò wa ń pèsè ìdá mẹ́rìndínlọ́gọ́rùn-ún (97%) ìpéye. Ṣùgbọ́n, kò sí ẹ̀rọ tó péye patapata.',
+    faq_q3: 'Kí ni ìtumọ̀ akọsílẹ̀ ìtẹ́numọ́ náà?',
+    faq_a3: 'Akọsílẹ̀ náà wà láti 0 dé 100. Lóke 70 jẹ́ òótọ́, 40-70 jẹ́ aláìdánidájọ́, àti abẹ 40 jẹ́ ìròyìn asán.',
+    faq_q4: 'Ṣé a ń tọ́jú tàbí pín data mi?',
+    faq_a4: 'Rárá. VerifyIt ń ṣe àyẹ̀wò rẹ lẹ́sẹkẹsẹ kò sì ní tọ́jú rẹ̀.',
+    faq_q5: 'Ṣé mo lè ṣàyẹwo àwòrán àti screenshot?',
+    faq_a5: 'Bẹ́ẹ̀ni! VerifyIt ń ṣe atilẹyin àwòrán nipa lílo OCR àti Gemini Vision AI.'
   },
   ha: {
     nav_verify: 'Tabbatar',
@@ -152,7 +178,20 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     verdict_desc_medium: 'Wannan abun cikin yana da alamar gaskiya amma wasu ƙididdiga ba a iya tabbatar da su ba.',
     verdict_desc_mixed: 'Wannan abun cikin yana da alamun gauraye — wasu abubuwa sun dace amma wasu suna da tambaya.',
     verdict_desc_warning: 'Wannan abun cikin yana nuna manyan alamun cewa ba a iya dogaro da shi ba ko ƙila yana zama mai yaudara.',
-    verdict_desc_fake: 'Wannan abun cikin yana iya zama ƙarya sosai ko kuma yaudara. Kasance mai matukar hankali.'
+    verdict_desc_fake: 'Wannan abun cikin yana iya zama ƙarya sosai ko kuma yaudara. Kasance mai matukar hankali.',
+    faq_title_1: 'Tambayoyin da Ake',
+    faq_title_2: 'Yawan Yi',
+    faq_subtitle: 'Duk abin da kuke buƙatar sani game da VerifyIt',
+    faq_q1: 'Ta yaya VerifyIt yake gano labaran ƙarya?',
+    faq_a1: 'VerifyIt yana amfani da hanyoyi daban-daban don bincike na gaskiya.',
+    faq_q2: 'Yaya ingancin binciken yake?',
+    faq_a2: 'Hanyar mu tana da kusan kashi 97 cikin 100 na inganci.',
+    faq_q3: 'Menene ma\'anar maki na gaskiya?',
+    faq_a3: 'Makin yana farawa daga 0 zuwa 100. Sama da 70 yana nufin labari na gaskiya ne.',
+    faq_q4: 'Shin ana ajiye bayanai na?',
+    faq_a4: 'A\'a. VerifyIt baya ajiye bayanan ku a cikin ma\'adanar mu.',
+    faq_q5: 'Zan iya bincika hotuna?',
+    faq_a5: 'Eh! Zaku iya bincika hotuna ta amfani da OCR da kuma tsarin AI.'
   },
   ig: {
     nav_verify: 'Nyocha',
@@ -204,7 +243,20 @@ export const translations: Record<LanguageCode, Record<string, string>> = {
     verdict_desc_medium: 'Ihe a yiri ka ọ pụrụ ịbụ eziokwu mana ụfọdụ nkwupụta adịghị edozi.',
     verdict_desc_mixed: 'Ihe a nwere akara ngwakọta — ụfọdụ ihe doro anya ma ụfọdụ adịghị mma.',
     verdict_desc_warning: 'Ihe a na-egosi ihe ngosi siri ike na ọ gaghị adị ntụkwasị obi ma ọ bụ nwere ike ịghọgharia.',
-    verdict_desc_fake: 'Ihe a ga-adị ọtụtụ oge ụgha ma ọ bụ nke a na-ezighị ezi. Nwee nchegbu nke ukwuu.'
+    verdict_desc_fake: 'Ihe a ga-adị ọtụtụ oge ụgha ma ọ bụ nke a na-ezighị ezi. Nwee nchegbu nke ukwuu.',
+    faq_title_1: 'Ajụjụ Ndị A Na-ajụ',
+    faq_title_2: 'Ọtụtụ Oge',
+    faq_subtitle: 'Ihe niile ịchọrọ ịma gbasara VerifyIt',
+    faq_q1: 'Kedu ka VerifyIt si achọpụta akụkọ ụgha?',
+    faq_a1: 'VerifyIt na-eji ụzọ dị iche iche enyocha, gụnyere BERT na LLM.',
+    faq_q2: 'Nyocha ahụ ọ ziri ezi?',
+    faq_a2: 'Usoro anyị ruru ihe dịka 97% izi ezi na nweta data.',
+    faq_q3: 'Kedu ihe akara ntụkwasị obi pụtara?',
+    faq_a3: 'Akara ahụ na-amalite na 0 ruo 100. N\'elu 70 pụtara na ọ bụ eziokwu.',
+    faq_q4: 'E debere data m?',
+    faq_a4: 'Mba. VerifyIt anaghị echekwa data gị n\'ịntanetị.',
+    faq_q5: 'Enwere m ike inyocha ihe onyonyo?',
+    faq_a5: 'Ee! Ị nwere ike inyocha ihe onyonyo site na iji ngwa OCR na AI.'
   }
 };
 
